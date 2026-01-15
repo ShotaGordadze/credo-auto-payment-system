@@ -59,6 +59,9 @@ namespace Credo.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Debt = table.Column<int>(type: "int", nullable: false),
                     SubscriberNumber = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ProviderId = table.Column<int>(type: "int", nullable: false),
                     UId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),

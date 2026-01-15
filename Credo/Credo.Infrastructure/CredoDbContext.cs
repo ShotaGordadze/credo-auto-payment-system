@@ -18,4 +18,8 @@ public class CredoDbContext : DbContext
         
         new ModelConfiguration.ModelConfiguration(modelBuilder).Configure();
     }
+    
+    public DbSet<Provider> Providers { get; set; }
+    public DbSet<ProviderCategory> ProviderCategories { get; set; }
+    public DbSet<Subscriber> Subscribers { get; set; }
 }

@@ -17,10 +17,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Credo.Application\Credo.Application.csproj" />
       <ProjectReference Include="..\Credo.Infrastructure\Credo.Infrastructure.csproj" />
     </ItemGroup>

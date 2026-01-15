@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using Credo.Infrastructure.Entities.Abstraction;
+using Credo.Infrastructure.Enums;
 using Credo.Infrastructure.Repository.Abstraction;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,10 +27,11 @@ public class Repository<TEntity> : IRepository<TEntity>
 
     public IQueryable<TEntity> Query(Expression<Func<TEntity, bool>>? predicate = null, bool onlyActive = true)
     {
-        var query =  onlyActive
-            ? BaseQuery.Where(x => x.IsActive())
-            : BaseQuery;
-        
+        IQueryable<TEntity> query = BaseQuery;
+
+        // if (onlyActive)
+        //     query = query.Where(x => x.EntityStatus == EntityStatus.Active);
+
         return predicate == null ? query : query.Where(predicate);
     }
 

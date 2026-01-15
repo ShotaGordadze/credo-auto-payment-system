@@ -71,6 +71,14 @@ public sealed class ModelConfiguration
             entity.Property(x => x.SubscriberNumber)
                 .IsRequired()
                 .HasMaxLength(100);
+            
+            entity.Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(200);
+            
+            entity.Property(x => x.LastName)
+                .IsRequired()
+                .HasMaxLength(200);
 
             entity.HasOne(x => x.Provider)
                 .WithMany(x => x.Subscribers)

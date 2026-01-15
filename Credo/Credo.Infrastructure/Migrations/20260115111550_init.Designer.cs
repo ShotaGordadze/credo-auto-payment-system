@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Credo.Infrastructure.Migrations
 {
     [DbContext(typeof(CredoDbContext))]
-    [Migration("20260115100345_init")]
+    [Migration("20260115111550_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -105,11 +105,24 @@ namespace Credo.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Debt")
+                        .HasColumnType("int");
+
                     b.Property<int>("EntityStatus")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastChangeDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("ProviderId")
                         .HasColumnType("int");
