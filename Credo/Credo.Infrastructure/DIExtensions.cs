@@ -11,7 +11,7 @@ public static class DIExtensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<Database>((sc, options) =>
+        services.AddDbContext<CredoDbContext>((sc, options) =>
         {
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         });

@@ -8,10 +8,10 @@ namespace Credo.Infrastructure.Repository;
 public class Repository<TEntity> : IRepository<TEntity>
     where TEntity : Entity
 {
-    private readonly Database _dbContext;
+    private readonly CredoDbContext _dbContext;
     protected readonly IQueryable<TEntity> BaseQuery;
 
-    public Repository(Database dbContext)
+    public Repository(CredoDbContext dbContext)
     {
         _dbContext = dbContext;
         BaseQuery = _dbContext.Set<TEntity>().AsQueryable();

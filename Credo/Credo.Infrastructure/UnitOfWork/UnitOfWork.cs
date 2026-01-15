@@ -3,7 +3,7 @@ using Credo.Infrastructure.UnitOfWork.Abstraction;
 
 namespace Credo.Infrastructure.UnitOfWork;
 
-public class UnitOfWork(Database dbContext) : IUnitOfWork
+public class UnitOfWork(CredoDbContext dbContext) : IUnitOfWork
 {
     public async Task<int> SaveAsync(CancellationToken cancellationToken = default)
     {

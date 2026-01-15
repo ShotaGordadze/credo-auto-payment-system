@@ -10,7 +10,7 @@ public class Provider : Entity
     public int ProviderCategoryId { get; set; }
     public ProviderCategory ProviderCategory { get; set; }
 
-    public virtual ICollection<ProviderDebtEvent> ProviderDebtEvents { get; set; } = [];
+    //public virtual ICollection<ProviderDebtEvent> ProviderDebtEvents { get; set; } = [];
 
     public virtual ICollection<Subscriber> Subscribers { get; set; } = [];
 }

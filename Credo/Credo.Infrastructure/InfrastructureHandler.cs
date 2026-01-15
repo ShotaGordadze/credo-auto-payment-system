@@ -7,7 +7,7 @@ public class InfrastructureHandler
 {
     public static async  Task InitDbContext(IServiceProvider serviceProvider)
     {
-        var db = serviceProvider.CreateScope().ServiceProvider.GetRequiredService<Database>();
+        var db = serviceProvider.CreateScope().ServiceProvider.GetRequiredService<CredoDbContext>();
         
         if ((await db.Database.GetPendingMigrationsAsync()).Any())
         {

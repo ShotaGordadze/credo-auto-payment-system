@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Credo.Infrastructure.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Credo.Infrastructure;
 
-public class Database : DbContext
+public class CredoDbContext : DbContext
 {
-    public Database(DbContextOptions<Database> options) : base(options){}
+    public CredoDbContext(DbContextOptions<CredoDbContext> options) : base(options){}
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -14,5 +15,7 @@ public class Database : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        
+        new ModelConfiguration.ModelConfiguration(modelBuilder).Configure();
     }
 }

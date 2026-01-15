@@ -1,6 +1,8 @@
+using Credo.Infrastructure.Entities.Abstraction;
+
 namespace Credo.Infrastructure.Entities;
 
-public class ProviderCategory
+public class ProviderCategory : Entity
 {
     public string Name { get; set; } = null!;
 
