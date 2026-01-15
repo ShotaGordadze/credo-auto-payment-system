@@ -21,7 +21,7 @@ public class Repository<TEntity> : IRepository<TEntity>
     public virtual async Task<TEntity?> Find(int id, bool onlyActive = true)
     {
         return onlyActive
-            ? await BaseQuery.Where(x => x.IsActive()).SingleOrDefaultAsync(x => x.Id == id)
+            ? await BaseQuery.Where(x => x.EntityStatus == EntityStatus.Active).SingleOrDefaultAsync(x => x.Id == id)
             : await BaseQuery.SingleOrDefaultAsync(x => x.Id == id);
     }
 
