@@ -27,7 +27,7 @@ public class GetProvidersQueryHandler : IRequestHandler<GetProvidersQuery, IColl
             .ToListAsync(cancellationToken);
 
         if (providers.Count != 0) return providers;
-        // If you REALLY need to distinguish: "category doesn't exist" vs "exists but empty"
+        
         var categoryExists = await _providerCategoryRepository.Query()
             .AsNoTracking()
             .AnyAsync(x => x.Id == request.ProviderCategoryId, cancellationToken);

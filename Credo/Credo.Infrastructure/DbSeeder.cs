@@ -72,6 +72,8 @@ public static class DbSeeder
                 .AsNoTracking()
                 .ToDictionaryAsync(x => x.providerName, x => x.Id);
 
+            var random = new Random();
+
             var subscribers = new List<Subscriber>
             {
                 new Subscriber
@@ -79,14 +81,16 @@ public static class DbSeeder
                     Name = "Giorgi",
                     LastName = "Beridze",
                     SubscriberNumber = "0102345678",
-                    ProviderId = providerIds["Telmiko"]
+                    ProviderId = providerIds["Telmiko"],
+                    Debt = random.Next(-1000, 0),
                 },
                 new Subscriber
                 {
                     Name = "Nika",
                     LastName = "Kapanadze",
                     SubscriberNumber = "0108765432",
-                    ProviderId = providerIds["Telmiko"]
+                    ProviderId = providerIds["Telmiko"],
+                    Debt = random.Next(-1000, 0),
                 },
 
                 new Subscriber
@@ -94,14 +98,16 @@ public static class DbSeeder
                     Name = "Luka",
                     LastName = "Gelashvili",
                     SubscriberNumber = "599112233",
-                    ProviderId = providerIds["Georgian provider"]
+                    ProviderId = providerIds["Georgian provider"],
+                    Debt = random.Next(-1000, 0),
                 },
                 new Subscriber
                 {
                     Name = "Sandro",
                     LastName = "Tsintsadze",
                     SubscriberNumber = "599445566",
-                    ProviderId = providerIds["Georgian provider"]
+                    ProviderId = providerIds["Georgian provider"],
+                    Debt = random.Next(-1000, 0),
                 },
 
                 new Subscriber
@@ -109,14 +115,16 @@ public static class DbSeeder
                     Name = "Mariam",
                     LastName = "Chkhaidze",
                     SubscriberNumber = "0322987654",
-                    ProviderId = providerIds["Georgian Water End Power"]
+                    ProviderId = providerIds["Georgian Water End Power"],
+                    Debt = random.Next(-1000, 1000),
                 },
                 new Subscriber
                 {
                     Name = "Tamar",
                     LastName = "Gogoladze",
                     SubscriberNumber = "0322765432",
-                    ProviderId = providerIds["Batumi Water"]
+                    ProviderId = providerIds["Batumi Water"],
+                    Debt = random.Next(-1000, 0),
                 },
 
                 new Subscriber
@@ -124,14 +132,16 @@ public static class DbSeeder
                     Name = "Irakli",
                     LastName = "Khutsishvili",
                     SubscriberNumber = "514123456",
-                    ProviderId = providerIds["Tbilisi energy"]
+                    ProviderId = providerIds["Tbilisi energy"],
+                    Debt = random.Next(-1000, 0),
                 },
                 new Subscriber
                 {
                     Name = "Dato",
                     LastName = "Abashidze",
                     SubscriberNumber = "514654321",
-                    ProviderId = providerIds["Tbilisi energy"]
+                    ProviderId = providerIds["Tbilisi energy"],
+                    Debt = random.Next(-1000, 0),
                 },
 
                 new Subscriber
@@ -139,17 +149,19 @@ public static class DbSeeder
                     Name = "Ana",
                     LastName = "Maisuradze",
                     SubscriberNumber = "577889900",
-                    ProviderId = providerIds["Socar Gas"]
+                    ProviderId = providerIds["Socar Gas"],
+                    Debt = random.Next(-1000, 0),
                 },
                 new Subscriber
                 {
                     Name = "Salome",
                     LastName = "Lomidze",
                     SubscriberNumber = "577001122",
-                    ProviderId = providerIds["Socar Gas"]
+                    ProviderId = providerIds["Socar Gas"],
+                    Debt = random.Next(-1000, 0),
                 }
             };
-            
+
             dbContext.Subscribers.AddRange(subscribers);
             await dbContext.SaveChangesAsync();
         }
