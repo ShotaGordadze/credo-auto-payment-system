@@ -12,12 +12,10 @@ public class
     GetProviderCategoriesQueryHandler : IRequestHandler<GetProviderCategoriesQuery, ICollection<ProviderCategory>>
 {
     private readonly IRepository<ProviderCategory> _repository;
-    private readonly IUnitOfWork _unitOfWork;
 
-    public GetProviderCategoriesQueryHandler(IRepository<ProviderCategory> repository, IUnitOfWork unitOfWork)
+    public GetProviderCategoriesQueryHandler(IRepository<ProviderCategory> repository)
     {
         _repository = repository;
-        _unitOfWork = unitOfWork;
     }
 
     public async Task<ICollection<ProviderCategory>> Handle(GetProviderCategoriesQuery request,
