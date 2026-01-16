@@ -22,4 +22,6 @@ public class CredoDbContext : DbContext
     public DbSet<Provider> Providers { get; set; }
     public DbSet<ProviderCategory> ProviderCategories { get; set; }
     public DbSet<Subscriber> Subscribers { get; set; }
+    public DbSet<Account> Accounts { get; set; }
+    public DbSet<AutoPaymentAccount> AutoPaymentAccounts { get; set; }
 }

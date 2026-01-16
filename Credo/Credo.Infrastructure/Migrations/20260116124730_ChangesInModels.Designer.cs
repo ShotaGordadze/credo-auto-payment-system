@@ -4,6 +4,7 @@ using Credo.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Credo.Infrastructure.Migrations
 {
     [DbContext(typeof(CredoDbContext))]
-    partial class CredoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260116124730_ChangesInModels")]
+    partial class ChangesInModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,7 +106,7 @@ namespace Credo.Infrastructure.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("TargetAccountNumber")
+                    b.Property<string>("TargetAccountNumeber")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -113,7 +116,7 @@ namespace Credo.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId", "TargetAccountNumber", "FrequencyInDays")
+                    b.HasIndex("AccountId", "TargetAccountNumeber", "FrequencyInDays")
                         .IsUnique();
 
                     b.ToTable("AutoPaymentAccounts", (string)null);

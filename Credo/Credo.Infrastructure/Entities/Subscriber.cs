@@ -12,4 +12,6 @@ public class Subscriber : Entity
     
     public int ProviderId { get; set; }
     public Provider Provider { get; set; }
+
+    public ICollection<Account> Accounts { get; set; } = [];
 }

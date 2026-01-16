@@ -1,4 +1,5 @@
 using Credo.Infrastructure.Entities;
+using Credo.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Credo.Infrastructure;
@@ -163,6 +164,72 @@ public static class DbSeeder
             };
 
             dbContext.Subscribers.AddRange(subscribers);
+            await dbContext.SaveChangesAsync();
+        }
+
+        if (!await dbContext.Accounts.AnyAsync())
+        {
+            var subscribers = await dbContext.Subscribers
+                .IgnoreQueryFilters()
+                .AsNoTracking()
+                .ToListAsync();
+
+            var existingSubscriberIds = await dbContext.Accounts
+                .IgnoreQueryFilters()
+                .Select(x => x.SubscriberId)
+                .ToListAsync();
+            var newAccounts = new List<Account>();
+
+            foreach (var subscriber in subscribers)
+            {
+                if (existingSubscriberIds.Contains(subscriber.Id))
+                    continue;
+
+                newAccounts.Add(new Account
+                {
+                    SubscriberId = subscriber.Id,
+                    AccountNumber = $"GE00TB{subscriber.Id:D14}",
+                    Currency = Currency.GEL,
+                    Balance = Random.Shared.Next(200, 5000),
+                    AccountType = AccountType.Visa
+                });
+            }
+
+            dbContext.Accounts.AddRange(newAccounts);
+            await dbContext.SaveChangesAsync();
+        }
+
+        if (!await dbContext.AutoPaymentAccounts.AnyAsync())
+        {
+            var accounts = await dbContext.Accounts
+                .IgnoreQueryFilters()
+                .AsNoTracking()
+                .ToListAsync();
+
+            var existingAutoPayments = await dbContext.AutoPaymentAccounts
+                .IgnoreQueryFilters()
+                .Select(x => x.AccountId)
+                .ToListAsync();
+
+            var autoPayments = new List<AutoPaymentAccount>();
+
+            foreach (var account in accounts)
+            {
+                if (existingAutoPayments.Contains(account.Id))
+                    continue;
+
+                autoPayments.Add(new AutoPaymentAccount
+                {
+                    AccountId = account.Id,
+                    TargetAccountNumber = account.AccountNumber,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(1),
+                    Amount = Random.Shared.Next(20, 300),
+                    FrequencyInDays = Random.Shared.Next(1, 10)
+                });
+            }
+
+            dbContext.AutoPaymentAccounts.AddRange(autoPayments);
             await dbContext.SaveChangesAsync();
         }
     }
