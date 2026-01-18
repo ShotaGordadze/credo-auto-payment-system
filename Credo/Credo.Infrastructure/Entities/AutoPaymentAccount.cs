@@ -13,4 +13,4 @@ public class AutoPaymentAccount : Entity
   public DateTime EndDate { get; set; }
   public decimal Amount { get; set; }
   public int FrequencyInDays { get; set; }
-}
+} 

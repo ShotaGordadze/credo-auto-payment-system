@@ -20,23 +20,30 @@ public class Repository<TEntity> : IRepository<TEntity>
 
     public virtual async Task<TEntity?> Find(int id, bool onlyActive = true)
     {
-        return onlyActive
-            ? await BaseQuery.Where(x => x.EntityStatus == EntityStatus.Active).SingleOrDefaultAsync(x => x.Id == id)
-            : await BaseQuery.SingleOrDefaultAsync(x => x.Id == id);
+        return await BaseQuery.SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public IQueryable<TEntity> Query(Expression<Func<TEntity, bool>>? predicate = null, bool onlyActive = true)
     {
         IQueryable<TEntity> query = BaseQuery;
-
-        // if (onlyActive)
-        //     query = query.Where(x => x.EntityStatus == EntityStatus.Active);
-
         return predicate == null ? query : query.Where(predicate);
     }
 
     public async Task Store(TEntity document)
     {
         await _dbContext.Set<TEntity>().AddAsync(document);
+    }
+
+    public bool Delete(TEntity entity)
+    {
+        try
+        {
+            _dbContext.Set<TEntity>().Remove(entity);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }
