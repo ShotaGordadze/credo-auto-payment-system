@@ -92,7 +92,7 @@ public sealed class ModelConfiguration
             entity.HasMany(x => x.AutoPaymentAccounts)
                 .WithOne(x => x.Account)
                 .HasForeignKey(x => x.AccountId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasIndex(x => x.AccountNumber)
                 .IsUnique();
