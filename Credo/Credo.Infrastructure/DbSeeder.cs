@@ -27,37 +27,37 @@ public static class DbSeeder
             {
                 new Provider
                 {
-                    providerName = "Telmiko",
+                    ProviderName = "Telmiko",
                     ProviderAccount = "5391196978250662",
                     ProviderCategoryId = categories["Electricity"]
                 },
                 new Provider
                 {
-                    providerName = "Georgian provider",
+                    ProviderName = "Georgian provider",
                     ProviderAccount = "5487932657020033",
                     ProviderCategoryId = categories["Electricity"]
                 },
                 new Provider
                 {
-                    providerName = "Georgian Water End Power",
+                    ProviderName = "Georgian Water End Power",
                     ProviderAccount = "5519727551117469",
                     ProviderCategoryId = categories["Water"]
                 },
                 new Provider
                 {
-                    providerName = "Batumi Water",
+                    ProviderName = "Batumi Water",
                     ProviderAccount = "5163752829567906",
                     ProviderCategoryId = categories["Water"]
                 },
                 new Provider
                 {
-                    providerName = "Tbilisi energy",
+                    ProviderName = "Tbilisi energy",
                     ProviderAccount = "5589461051529230",
                     ProviderCategoryId = categories["Gas"]
                 },
                 new Provider
                 {
-                    providerName = "Socar Gas",
+                    ProviderName = "Socar Gas",
                     ProviderAccount = "5500597792249715",
                     ProviderCategoryId = categories["Gas"]
                 }
@@ -71,13 +71,13 @@ public static class DbSeeder
         {
             var providerIds = await dbContext.Providers
                 .AsNoTracking()
-                .ToDictionaryAsync(x => x.providerName, x => x.Id);
+                .ToDictionaryAsync(x => x.ProviderName, x => x.Id);
 
             var random = new Random();
 
-            var subscribers = new List<Subscriber>
+            var subscribers = new List<CustomerSubscribtion>
             {
-                new Subscriber
+                new CustomerSubscribtion
                 {
                     Name = "Giorgi",
                     LastName = "Beridze",
@@ -85,7 +85,7 @@ public static class DbSeeder
                     ProviderId = providerIds["Telmiko"],
                     Debt = random.Next(-1000, 0),
                 },
-                new Subscriber
+                new CustomerSubscribtion
                 {
                     Name = "Nika",
                     LastName = "Kapanadze",
@@ -94,7 +94,7 @@ public static class DbSeeder
                     Debt = random.Next(-1000, 0),
                 },
 
-                new Subscriber
+                new CustomerSubscribtion
                 {
                     Name = "Luka",
                     LastName = "Gelashvili",
@@ -102,7 +102,7 @@ public static class DbSeeder
                     ProviderId = providerIds["Georgian provider"],
                     Debt = random.Next(-1000, 0),
                 },
-                new Subscriber
+                new CustomerSubscribtion
                 {
                     Name = "Sandro",
                     LastName = "Tsintsadze",
@@ -111,7 +111,7 @@ public static class DbSeeder
                     Debt = random.Next(-1000, 0),
                 },
 
-                new Subscriber
+                new CustomerSubscribtion
                 {
                     Name = "Mariam",
                     LastName = "Chkhaidze",
@@ -119,7 +119,7 @@ public static class DbSeeder
                     ProviderId = providerIds["Georgian Water End Power"],
                     Debt = random.Next(-1000, 1000),
                 },
-                new Subscriber
+                new CustomerSubscribtion
                 {
                     Name = "Tamar",
                     LastName = "Gogoladze",
@@ -128,7 +128,7 @@ public static class DbSeeder
                     Debt = random.Next(-1000, 0),
                 },
 
-                new Subscriber
+                new CustomerSubscribtion
                 {
                     Name = "Irakli",
                     LastName = "Khutsishvili",
@@ -136,7 +136,7 @@ public static class DbSeeder
                     ProviderId = providerIds["Tbilisi energy"],
                     Debt = random.Next(-1000, 0),
                 },
-                new Subscriber
+                new CustomerSubscribtion
                 {
                     Name = "Dato",
                     LastName = "Abashidze",
@@ -145,7 +145,7 @@ public static class DbSeeder
                     Debt = random.Next(-1000, 0),
                 },
 
-                new Subscriber
+                new CustomerSubscribtion
                 {
                     Name = "Ana",
                     LastName = "Maisuradze",
@@ -153,7 +153,7 @@ public static class DbSeeder
                     ProviderId = providerIds["Socar Gas"],
                     Debt = random.Next(-1000, 0),
                 },
-                new Subscriber
+                new CustomerSubscribtion
                 {
                     Name = "Salome",
                     LastName = "Lomidze",
@@ -176,7 +176,7 @@ public static class DbSeeder
 
             var existingSubscriberIds = await dbContext.Accounts
                 .IgnoreQueryFilters()
-                .Select(x => x.SubscriberId)
+                .Select(x => x.CustomerSubscriptionId)
                 .ToListAsync();
             var newAccounts = new List<Account>();
 
@@ -187,7 +187,7 @@ public static class DbSeeder
 
                 newAccounts.Add(new Account
                 {
-                    SubscriberId = subscriber.Id,
+                    CustomerSubscriptionId = subscriber.Id,
                     AccountNumber = $"GE00TB{subscriber.Id:D14}",
                     Currency = Currency.GEL,
                     Balance = Random.Shared.Next(200, 5000),

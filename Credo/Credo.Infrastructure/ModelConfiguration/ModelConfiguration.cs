@@ -32,7 +32,7 @@ public sealed class ModelConfiguration
         {
             entity.ToTable("Providers");
 
-            entity.Property(x => x.providerName)
+            entity.Property(x => x.ProviderName)
                 .IsRequired()
                 .HasMaxLength(200);
 
@@ -84,9 +84,9 @@ public sealed class ModelConfiguration
             entity.Property(x => x.AccountType)
                 .IsRequired();
 
-            entity.HasOne(x => x.Subscriber)
+            entity.HasOne(x => x.CustomerSubscribtion)
                 .WithMany(x => x.Accounts)
-                .HasForeignKey(x => x.SubscriberId)
+                .HasForeignKey(x => x.CustomerSubscriptionId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasMany(x => x.AutoPaymentAccounts)
@@ -141,7 +141,7 @@ public sealed class ModelConfiguration
 
     private void ConfigureSubscriber()
     {
-        _modelBuilder.Entity<Subscriber>(entity =>
+        _modelBuilder.Entity<CustomerSubscribtion>(entity =>
         {
             entity.ToTable("Subscribers");
             

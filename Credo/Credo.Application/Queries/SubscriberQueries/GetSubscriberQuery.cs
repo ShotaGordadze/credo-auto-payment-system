@@ -5,18 +5,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Credo.Application.Queries.SubscriberQueries;
 
-public record GetSubscriberQuery(int ProviderId, string SubscriberNumber) : IRequest<Subscriber>;
+public record GetSubscriberQuery(int ProviderId, string SubscriberNumber) : IRequest<CustomerSubscribtion>;
 
-public class GetSubscriberQueryHandler : IRequestHandler<GetSubscriberQuery, Subscriber>
+public class GetSubscriberQueryHandler : IRequestHandler<GetSubscriberQuery, CustomerSubscribtion>
 {
-    private readonly IRepository<Subscriber> _repository;
+    private readonly IRepository<CustomerSubscribtion> _repository;
 
-    public GetSubscriberQueryHandler(IRepository<Subscriber> repository)
+    public GetSubscriberQueryHandler(IRepository<CustomerSubscribtion> repository)
     {
         _repository = repository;
     }
 
-    public async Task<Subscriber> Handle(GetSubscriberQuery request, CancellationToken cancellationToken)
+    public async Task<CustomerSubscribtion> Handle(GetSubscriberQuery request, CancellationToken cancellationToken)
     {
         var subscriber = await _repository.Query()
             .Where(s => s.SubscriberNumber == request.SubscriberNumber)

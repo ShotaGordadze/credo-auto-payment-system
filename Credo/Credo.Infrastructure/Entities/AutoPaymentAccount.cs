@@ -8,7 +8,6 @@ public class AutoPaymentAccount : Entity
 {
   public int AccountId { get; set; }
   public Account Account { get; set; }
-  
   public string TargetAccountNumber { get; set; }
   public DateTime StartDate { get; set; }
   public DateTime EndDate { get; set; }
