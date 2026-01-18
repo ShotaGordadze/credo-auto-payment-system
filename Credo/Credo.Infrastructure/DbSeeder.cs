@@ -188,7 +188,7 @@ public static class DbSeeder
                 newAccounts.Add(new Account
                 {
                     CustomerSubscriptionId = subscriber.Id,
-                    AccountNumber = $"GE00CB{subscriber.Id:D14}",
+                    AccountNumber = $"GE00CD{subscriber.Id:D14}",
                     Currency = Currency.GEL,
                     Balance = Random.Shared.Next(200, 5000),
                     AccountType = AccountType.Visa
