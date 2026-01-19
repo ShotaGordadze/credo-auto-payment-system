@@ -103,7 +103,7 @@ public sealed class ModelConfiguration
     {
         _modelBuilder.Entity<AutoPaymentAccount>(entity =>
         {
-            entity.ToTable("AutoPaymentAccounts");
+            entity.ToTable("AutoPaymentTemplate");
 
             entity.HasKey(x => x.Id);
 

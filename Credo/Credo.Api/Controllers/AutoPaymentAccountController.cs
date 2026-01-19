@@ -1,4 +1,5 @@
 using Credo.Application.Commands.AutoPaymentAccountCommands;
+using Credo.Application.Queries.AutoPaymentAccountsQueries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,11 +30,27 @@ public class AutoPaymentAccountController : ControllerBase
         return Ok(result);
     }
 
-    [HttpDelete("auto-payment-account")]
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync()
+    {
+        var result = await _mediator.Send(new GetAutoPaymentAccounts());
+
+        return Ok(result);
+    }
+
+    [HttpPut("update=auto-payment-account-amount")]
+    public async Task<IActionResult> UpdateAsync([FromQuery] int id, [FromBody] decimal amount)
+    {
+        var result = await _mediator.Send(new UpdateAutoPaymentAccountAmount(id, amount));
+
+        return Ok(result);
+    }
+
+    [HttpDelete("delete-auto-payment-account")]
     public async Task<IActionResult> DeleteAsync([FromQuery] int id)
     {
         var result = await _mediator.Send(new DeleteAutPaymentAccountCommand(id));
-        
+
         return Ok(result);
     }
 
