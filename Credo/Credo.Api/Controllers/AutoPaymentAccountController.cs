@@ -41,7 +41,7 @@ public class AutoPaymentAccountController : ControllerBase
     [HttpPut("update=auto-payment-account-amount")]
     public async Task<IActionResult> UpdateAsync([FromQuery] int id, [FromBody] decimal amount)
     {
-        var result = await _mediator.Send(new UpdateAutoPaymentAccountAmount(id, amount));
+        var result = await _mediator.Send(new UpdateAutoPaymentAccountAmounid, amount));
 
         return Ok(result);
     }
